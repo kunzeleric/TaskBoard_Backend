@@ -15,11 +15,11 @@ let doc = {
     },
     servers:[
         {
-            url: "http://localhost:4000",
+            url: "https://localhost:4000",
             description: "Servidor localhost."
         },
         {
-            url: "http://taskbd-back.vercel.app/",
+            url: "https://taskbd-back.vercel.app/",
             description: "Servidor de produção."
         }
     ],
