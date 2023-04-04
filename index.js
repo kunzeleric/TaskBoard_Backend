@@ -14,7 +14,7 @@ require('dotenv').config(); //chamando e configurando o dotenv
 //configurando o express e outros
 app.use(cors()); //utilizando cors
 app.use(logger('dev'));
-app.use(express.json());
+app.use(express.json()); //configura express para responder em JSON
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));

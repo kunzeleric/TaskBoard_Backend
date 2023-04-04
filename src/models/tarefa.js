@@ -1,3 +1,5 @@
+//Cria a entidade Tarefa e denomina e tipa os dados deste esquema.
+
 const mongoose = require('mongoose');
 
 const esquema = new mongoose.Schema(

@@ -1,3 +1,5 @@
+//Arquivo criado para conexão com o banco de dados MongoDB, também chama tratamento de erros esperados.
+
 const mongoose = require('mongoose');
 const tratarErrosEsperados = require('../functions/tratarErrosEsperados');
 

@@ -1,3 +1,5 @@
+// Arquivo para fazer validação de senha para acessar a documentação da API.
+
 async function authDocProducao(req, res, next) {
     const { senhaDigitada } = req.body;
 

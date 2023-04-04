@@ -1,3 +1,5 @@
+//Cria a entidade Usuário e denomina e tipa os dados deste esquema.
+
 const mongoose = require('mongoose');
 const validator = require('validator');
 
