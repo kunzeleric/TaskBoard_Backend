@@ -9,12 +9,12 @@ async function authUser(req, res, next) {
     }
 
     try {
-        const decoded = jwt.verify(token, proccess.env.JTW_SECRET); //decodifica o token e utiliza a variavel JWT_SECRET para validar o token
+        const decoded = jwt.verify(token, process.env.JWT_SECRET); //decodifica o token e utiliza a variavel JWT_SECRET para validar o token
 
         req.usuarioJwt = decoded;
 
         next();
-        
+
     } catch (error) {
         console.error(error);
         return tratarErrosEsperados(res, new Error("Token de autenticação inválido."));
