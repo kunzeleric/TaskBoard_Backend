@@ -57,7 +57,7 @@ router.get('/obter/usuario', authUser, connectDataBase, async function (req, res
     // #swagger.description = ['Endpoint para obter tarefas do usuário logado.']
 
     const usuarioLogado = req.usuarioJwt.id;
-    const respostaBD = await EsquemaTarefa.find({ usuarioCriador: usuarioLogado }).populate('usuarioCriador');
+    const respostaBD = await EsquemaTarefa.find({ usuarioCriador: usuarioLogado }).populate('usuarioCriador'); //metodo find traz todas tarefas referentes ao usuario logado
 
     res.status(200).json({
       status: "OK",
@@ -69,6 +69,31 @@ router.get('/obter/usuario', authUser, connectDataBase, async function (req, res
     return tratarErrosEsperados(res, error);
   }
 });
+
+router.delete('/deletar/:id', authUser, connectDataBase, async function (req, res) {
+  try {
+    // #swagger.tags = ['Tarefa']
+    let idTarefa = req.params.id; //coleta o ID da URL
+    const usuarioLogado = req.usuarioJwt.id;
+    
+    const checkTarefa = await EsquemaTarefa.findOne({ _id: idTarefa, usuarioCriador: usuarioLogado });
+    if(!checkTarefa){
+      throw new Error("Tarefa não encontrada ou pertence a outro usuário!")
+    }
+
+    const respostaBD = await EsquemaTarefa.deleteOne({ _id: idTarefa });
+
+    res.status(200).json({
+      status: "OK",
+      statusMessage: "Tarefa deletada com sucesso.",
+      response: respostaBD
+    })
+
+  } catch (error) {
+    return tratarErrosEsperados(res, error);
+  }
+});
+
 
 
 module.exports = router;
