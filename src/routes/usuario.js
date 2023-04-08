@@ -6,13 +6,15 @@ const jwt = require('jsonwebtoken');
 const EsquemaUsuario = require('../models/usuario');
 const router = express.Router();
 
+
+//rota para criar usuário
 router.post('/criar', connectDataBase, async function (req, res) {
   try {
     // #swagger.tags = ['Usuario']
-    let { nome, email, senha } = req.body;
-    const numeroVezesHash = 10;
-    const senhaHash = await bcrypt.hash(senha, numeroVezesHash);
-    const respostaBD = await EsquemaUsuario.create({ nome, email, senha: senhaHash });
+    let { nome, email, senha } = req.body; //inputa as informações de nome, email e senha dentro do corpo da requisição
+    const numeroVezesHash = 10; //numero aleatório
+    const senhaHash = await bcrypt.hash(senha, numeroVezesHash); //encripta a senha
+    const respostaBD = await EsquemaUsuario.create({ nome, email, senha: senhaHash }); //cria o usuario baseado no Esquema Usuario definido do banco de dados
 
     res.status(200).json({
       status: "OK",
@@ -21,13 +23,15 @@ router.post('/criar', connectDataBase, async function (req, res) {
     })
 
   } catch (error) {
-    if (String(error).includes("email_1 dup key")) {
+    if (String(error).includes("email_1 dup key")) { //mensagem exibida padrão para caso o email seja duplicado
       return tratarErrosEsperados(res, "Error: Já existe uma conta com este e-mail.");
     }
     return tratarErrosEsperados(res, error);
   }
 });
 
+
+//rota para logar usuário
 router.post('/logar', connectDataBase, async function (req, res) {
   try {
     // #swagger.tags = ['Usuario']

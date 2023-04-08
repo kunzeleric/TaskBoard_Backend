@@ -8,6 +8,9 @@ Antes de tudo, você precisa baixar todas dependências antes de executar esse p
 
 ### Dependências:
 - NodeJS
+- ExpressJS
+- Mongoose
+- SwaggerAutoGen
 - NPM
 
 -------------------------------------------------------------------------------------------------------------------------------------------------
@@ -20,4 +23,13 @@ Antes de tudo, você precisa baixar todas dependências antes de executar esse p
 5) Entre na documentação da API utilizando o endereço: ```http://localhost:4000/```
 
 -------------------------------------------------------------------------------------------------------------------------------------------------
+
+## Sobre o Projeto:
+
+- Feito para um site fictício com funcionalidade de Criação de Tarefas, permitindo a gestão do trabalho de projetos\atividades.
+- Frontend será desenvolvido posteriormente.
+- É possível criar e logar com usuário, e criar\editar\deletar tarefas.
+- Intuito de aprendizado de tecnologias de Backend comuns no mercado de trabalho.
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
 

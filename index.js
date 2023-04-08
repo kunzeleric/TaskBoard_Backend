@@ -8,20 +8,18 @@ const swaggerOptions = { customCssUrl: '/swagger-ui.css' };
 const routes = require('./src/routes');
 const authDocProducao = require('./src/middlewares/authDoc');
 const app = express();
-require('dotenv').config(); //chamando e configurando o dotenv
-
+require('dotenv').config(); //chamando e configurando o dotenv para utilizar variáveis de ambiente (environment)
 
 //configurando o express e outros
-app.use(cors()); //utilizando cors
-app.use(logger('dev'));
+app.use(cors()); //utilizado para evitar problemas de CORS (integração de backend com frontend)
+app.use(logger('dev')); //utilizando o dev para startar o comando no package json (npm start dev)
 app.use(express.json()); //configura express para responder em JSON
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
 //configuração do swagger
-if (process.env.NODE_ENV !== 'test') {
+if (process.env.NODE_ENV !== 'test') { //se o ambiente não for teste, ele documenta e salva o arquivo
     const swaggerFile = require('./swagger/swagger_output.json');
     app.get('/', (req, res) => {  /*#swagger.ignore = true*/ res.redirect('/doc'); });
     app.use('/doc', authDocProducao, swaggerUi.serve, swaggerUi.setup(swaggerFile, swaggerOptions));
@@ -29,7 +27,6 @@ if (process.env.NODE_ENV !== 'test') {
 
 //rotas api
 routes(app);
-
 
 //inicializando servidor
 if (process.env.NODE_ENV !== 'test') {
